@@ -1,0 +1,7 @@
+[SERVERINFO]
+#The base directory for your Gemini content
+basedir = /gemini/base/directory/
+feeddir = feeds/
+#sleeptime in seconds (time is divided by the number of feed entries to avoid spamming servers)
+sleeptime = 3600
+home = gemini://gemini.address.com

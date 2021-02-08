@@ -46,7 +46,7 @@ def createGMIFile(gmiEntry, rssname, feedcount):
         feedcount = 0
         return feedcount
     elif feedcount < 20:
-        with open(filename, 'e') as writer:
+        with open(filename, 'a') as writer:
             writer.write(gmiEntry)
             print('File Updated')
         return feedcount

@@ -38,7 +38,7 @@ def buildEntry(title, htmlarticle, link):
 
 def createGMIFile(gmiEntry, rssname, updated):
     filename = contentdir + feeddir + rssname + ".gmi"
-    with open(filename, 'a') as writer:
+    with open(filename, 'w') as writer:
         writer.write(gmiEntry)
         print('File Updated')
       

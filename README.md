@@ -25,6 +25,6 @@ modified = _leave this section blank_ <br/>
 #The base directory for your Gemini content <br/>
 basedir = /gemini/base/directory/ <br/>
 feeddir = feeds/ <br/>
-#sleeptime in seconds (time is divided by the number of feed entries to avoid spamming servers)
+#sleeptime in seconds (time is divided by the number of feed entries to avoid spamming servers) <br/>
 sleeptime = 3600 <br/>
 home = gemini://gemini.address.com <br/>

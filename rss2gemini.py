@@ -51,7 +51,7 @@ def updateIndex():
         header.write('## RSS Feeds \n')
 
     for item in feedCfg.sections():
-        link = "=> " + feeddir + item + '.gmi ' + feedCfg[item]['feedtitle'] + " Updated: " + feedCfg[item]['modified'] + "\n"
+        link = "=> " + item + '.gmi ' + feedCfg[item]['feedtitle'] + " Updated: " + feedCfg[item]['modified'] + "\n"
         with open(indexFile, 'a') as update:
             update.write(link)
 

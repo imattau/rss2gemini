@@ -17,3 +17,14 @@ There are two config files, _config.ini_ and _server.ini_ <br/>
 feedtitle = _Title of the feed_ <br/>
 url = _http url of the rss feed_ <br/>
 modified = _leave this section blank_ <br/>
+
+<br/>
+
+**server.ini format** <br/>
+[SERVERINFO] <br/>
+#The base directory for your Gemini content <br/>
+basedir = /gemini/base/directory/ <br/>
+feeddir = feeds/ <br/>
+#sleeptime in seconds (time is divided by the number of feed entries to avoid spamming servers)
+sleeptime = 3600 <br/>
+home = gemini://gemini.address.com <br/>

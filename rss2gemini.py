@@ -42,7 +42,7 @@ def createGMIFile(gmiEntry, rssname, feedcount):
     if feedcount >= 20:
         with open(filename, 'w') as writer:
             writer.write(gmiEntry)
-            print('File Updated')
+            print('File Refreshed')
         feedcount = 0
         return feedcount
     elif feedcount < 20:
@@ -106,20 +106,20 @@ async def rss2text():
                 continue
             elif hasattr(feed, 'modified') and feed.modified > feedCfg[fn]['modified']:
                 for entry in feed.entries:
-                
-                    title = entry.title
-                    htmlarticle = ""
-                    link = entry.link
-                    if 'content' in entry:
-                        htmlarticle = BeautifulSoup(entry.content[0].value, "html5lib").prettify()
-                        #print(htmlarticle) 
-                    elif 'description' in entry:
-                        htmlarticle = BeautifulSoup(entry.description, "html5lib").prettify()
-                        #print('Has description')
-                    #Build up the GMI file entry with the correct formatting
-                    gmiEntry = buildEntry(title, htmlarticle, link)
-                    
-                    feedcount = createGMIFile(gmiEntry, fn, feedcount)
+                    if entry.published > feedCfg[fn]['modified']: 
+                        title = entry.title
+                        htmlarticle = ""
+                        link = entry.link
+                        if 'content' in entry:
+                            htmlarticle = BeautifulSoup(entry.content[0].value, "html5lib").prettify()
+                            #print(htmlarticle) 
+                        elif 'description' in entry:
+                            htmlarticle = BeautifulSoup(entry.description, "html5lib").prettify()
+                            #print('Has description')
+                        #Build up the GMI file entry with the correct formatting
+                        gmiEntry = buildEntry(title, htmlarticle, link)
+                        
+                        feedcount = createGMIFile(gmiEntry, fn, feedcount)
         updateIndex()                    
         sleeptime = int(serverCfg['SERVERINFO']['sleeptime']) / len(feedCfg.items())
         print('Sleeping for ', sleeptime)

@@ -104,7 +104,7 @@ async def rss2text():
                 print('No new feed items')
                 #Do nothing as the feed has not been updated
                 continue
-            elif hasattr(feed, 'modified') and feed.modified < feedCfg[fn]['modified']:
+            elif hasattr(feed, 'modified') and feed.modified > feedCfg[fn]['modified']:
                 for entry in feed.entries:
                 
                     title = entry.title

@@ -5,7 +5,7 @@ python3
 pip
 
 ## Additional Python Libraries
-pip3 install html2text
+pip3 install html2text \n
 pip3 install feedparser
 pip3 install configparser
 pip3 install bs4

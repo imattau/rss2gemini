@@ -91,7 +91,8 @@ async def rss2text():
                 gmiEntry = buildEntry(title, htmlarticle, link)
                 
                 createGMIFile(gmiEntry, fn)
-                
+                feedCfg[fn]['lastpub'] = entry.published
+                print(entry.published)
         else:
             feed = feedparser.parse(feedCfg[fn]['url'], modified=feedCfg[fn]['modified'])
               
@@ -100,8 +101,8 @@ async def rss2text():
                 #Do nothing as the feed has not been updated
                 continue
             elif hasattr(feed, 'modified') and feed.modified > feedCfg[fn]['modified']:
-                for entry in reversed(feed.entries):
-                    if entry.published > feedCfg[fn]['modified']: 
+                for entry in feed.entries:
+                    if entry.published > feedCfg[fn]['lastpub']: 
                         title = entry.title
                         htmlarticle = ""
                         link = entry.link
@@ -115,8 +116,11 @@ async def rss2text():
                         gmiEntry = buildEntry(title, htmlarticle, link)
                         
                         createGMIFile(gmiEntry, fn)
+                        feedCfg[fn]['lastpub'] = entry.published
+                        print(entry.published)
         
         feedCfg[fn]['modified'] = feed.modified
+        
         with open('config.ini', 'w') as cfgWriter:
             feedCfg.write(cfgWriter) 
         updateIndex()                    

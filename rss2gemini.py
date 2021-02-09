@@ -72,7 +72,7 @@ async def rss2text():
             feedCfg[fn]['modified'] = feed.modified
             print(feedCfg[fn]['modified'])
             with open('config.ini', 'w') as cfgWriter:
-                feedCfg.write(cfgWriter)
+                cfgWriter.write(feedCfg[fn]['modified'])
             
             
 
@@ -94,7 +94,7 @@ async def rss2text():
                 
         else:
             feed = feedparser.parse(feedCfg[fn]['url'], modified=feedCfg[fn]['modified'])
-            feedCfg[fn]['modified'] = feed.modified   
+              
             if feed == {}:
                 print('No new feed items')
                 #Do nothing as the feed has not been updated

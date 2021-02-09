@@ -76,7 +76,7 @@ async def rss2text():
             
             
 
-            for entry in feed.entries:
+            for entry in reversed(feed.entries):
                 
                 title = entry.title
                 htmlarticle = ""
@@ -101,7 +101,7 @@ async def rss2text():
                 #Do nothing as the feed has not been updated
                 continue
             elif hasattr(feed, 'modified') and feed.modified > feedCfg[fn]['modified']:
-                for entry in feed.entries:
+                for entry in reversed(feed.entries):
                     if entry.published > feedCfg[fn]['lastpub']: 
                         title = entry.title
                         htmlarticle = ""

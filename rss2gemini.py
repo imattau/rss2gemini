@@ -39,7 +39,7 @@ def buildEntry(title, htmlarticle, link):
 def createGMIFile(gmiEntry, rssname):
     filename = contentdir + feeddir + rssname + ".gmi"
        
-    with open(filename, 'w') as writer:
+    with open(filename, 'a') as writer:
         writer.write(gmiEntry)
         print('File Refreshed')
     
@@ -72,7 +72,7 @@ async def rss2text():
             feedCfg[fn]['modified'] = feed.modified
             print(feedCfg[fn]['modified'])
             with open('config.ini', 'w') as cfgWriter:
-                cfgWriter.write(feedCfg[fn]['modified'])
+                feedCfg.write(cfgWriter)
             
             
 
@@ -117,7 +117,7 @@ async def rss2text():
                         createGMIFile(gmiEntry, fn)
                 feedCfg[fn]['modified'] = feed.modified
                 with open('config.ini', 'w') as cfgWriter:
-                    cfgWriter.write(feedCfg[fn]['modified']) 
+                    feedCfg.write(cfgWriter) 
         updateIndex()                    
         sleeptime = int(serverCfg['SERVERINFO']['sleeptime']) / len(feedCfg.items())
         print('Sleeping for ', sleeptime)

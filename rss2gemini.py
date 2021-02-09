@@ -90,7 +90,7 @@ async def rss2text():
                 #Build up the GMI file entry with the correct formatting
                 gmiEntry = buildEntry(title, htmlarticle, link)
                 
-                createGMIFile(gmiEntry, fn, feed.modified)
+                createGMIFile(gmiEntry, fn)
                 
         else:
             feed = feedparser.parse(feedCfg[fn]['url'], modified=feedCfg[fn]['modified'])

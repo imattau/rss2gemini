@@ -94,7 +94,7 @@ async def rss2text():
                 
         else:
             feed = feedparser.parse(feedCfg[fn]['url'], modified=feedCfg[fn]['modified'])
-               
+            feedCfg[fn]['modified'] = feed.modified   
             if feed == {}:
                 print('No new feed items')
                 #Do nothing as the feed has not been updated
@@ -115,6 +115,7 @@ async def rss2text():
                         gmiEntry = buildEntry(title, htmlarticle, link)
                         
                         createGMIFile(gmiEntry, fn)
+                feedCfg[fn]['modified'] = feed.modified 
         updateIndex()                    
         sleeptime = int(serverCfg['SERVERINFO']['sleeptime']) / len(feedCfg.items())
         print('Sleeping for ', sleeptime)

@@ -115,9 +115,10 @@ async def rss2text():
                         gmiEntry = buildEntry(title, htmlarticle, link)
                         
                         createGMIFile(gmiEntry, fn)
-                feedCfg[fn]['modified'] = feed.modified
-                with open('config.ini', 'w') as cfgWriter:
-                    feedCfg.write(cfgWriter) 
+        
+        feedCfg[fn]['modified'] = feed.modified
+        with open('config.ini', 'w') as cfgWriter:
+            feedCfg.write(cfgWriter) 
         updateIndex()                    
         sleeptime = int(serverCfg['SERVERINFO']['sleeptime']) / len(feedCfg.items())
         print('Sleeping for ', sleeptime)

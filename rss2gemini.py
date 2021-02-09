@@ -114,7 +114,7 @@ async def rss2text():
                         #Build up the GMI file entry with the correct formatting
                         gmiEntry = buildEntry(title, htmlarticle, link)
                         
-                        createGMIFile(gmiEntry, fn, feedcount)
+                        createGMIFile(gmiEntry, fn)
         updateIndex()                    
         sleeptime = int(serverCfg['SERVERINFO']['sleeptime']) / len(feedCfg.items())
         print('Sleeping for ', sleeptime)

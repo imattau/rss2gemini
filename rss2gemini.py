@@ -36,20 +36,15 @@ def buildEntry(title, htmlarticle, link):
     
     return entry
 
-def createGMIFile(gmiEntry, rssname, feedcount):
+def createGMIFile(gmiEntry, rssname):
     filename = contentdir + feeddir + rssname + ".gmi"
+       
+    with open(filename, 'w') as writer:
+        writer.write(gmiEntry)
+        print('File Refreshed')
     
-    if feedcount >= 20:
-        with open(filename, 'w') as writer:
-            writer.write(gmiEntry)
-            print('File Refreshed')
-        feedcount = 0
-        return feedcount
-    elif feedcount < 20:
-        with open(filename, 'a') as writer:
-            writer.write(gmiEntry)
-            print('File Updated')
-        return feedcount
+    
+    
         
       
     
@@ -71,7 +66,7 @@ async def rss2text():
 
     for fn in feedCfg.sections():
         print(fn)
-        feedcount = 0
+        
         if feedCfg[fn]['modified'] == "":
             feed = feedparser.parse(feedCfg[fn]['url'])
             feedCfg[fn]['modified'] = feed.modified
@@ -82,7 +77,7 @@ async def rss2text():
             
 
             for entry in feed.entries:
-                feedcount += 1
+                
                 title = entry.title
                 htmlarticle = ""
                 link = entry.link
@@ -119,7 +114,7 @@ async def rss2text():
                         #Build up the GMI file entry with the correct formatting
                         gmiEntry = buildEntry(title, htmlarticle, link)
                         
-                        feedcount = createGMIFile(gmiEntry, fn, feedcount)
+                        createGMIFile(gmiEntry, fn, feedcount)
         updateIndex()                    
         sleeptime = int(serverCfg['SERVERINFO']['sleeptime']) / len(feedCfg.items())
         print('Sleeping for ', sleeptime)
